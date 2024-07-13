@@ -17,14 +17,14 @@
 
 ## Como iniciar o servidor:
 
-vincule seu banco de dados
+### vincule o seu banco de dados
 ```
-crie o .env.develop e use o .env.example como modelo, alterando seus devidos valores
+crie um arquivo chamado .env.develop na raiz do projeto e use o .env.example como modelo, alterando seus devidos valores
 ```
 
 ### instale o node no projeto
 ```javascript
-npm install / npm i
+npm install
 ```
 
 ### rode o prisma no projeto
@@ -44,11 +44,11 @@ npm run studio:dev
 
 # Documentação Completa e Testes de Rotas:
 
-### Rota da documentação: GET /docs
+## Rota da documentação: GET /docs
 
 ## Rotas de Usuário
 
-### Registrar usuário: POST /users
+### Registrar usuário: POST /users/register
 
 Padrão de Corpo:
 ```json
@@ -112,9 +112,174 @@ Forneça o token do usuário correspondente:
 
 Padrão de Resposta (STATUS 200):
 ```json
+[
+	{
+		"id": 1,
+		"name": "john doe",
+		"email": "john_doe@mail.com"
+	}
+]
+```
+
+
+### Obter apenas um usuário(necessário autorização): GET /users/:id
+Forneça o token do usuário correspondente:
+```json
 {
-	"id": 1,
-	"name": "john doe",
-	"email": "john_doe@mail.com"
+  "headers": {
+    "Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzA4NTQ2MDQzfQ.pDcRf1yu1XmVaIrRLOBoa6O_8Ukl1lxX-6lkxwcJRtI"
+  }
 }
+```
+
+Padrão de Resposta (STATUS 200):
+```json
+	{
+		"id": 1,
+		"name": "john doe",
+		"email": "john_doe@mail.com"
+	}
+```
+
+## Rotas de produtos
+
+### Criar produto(necessário autorização): POST /product
+Forneça o token do usuário correspondente:
+
+```json
+{
+  "headers": {
+    "Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzA4NTQ2MDQzfQ.pDcRf1yu1XmVaIrRLOBoa6O_8Ukl1lxX-6lkxwcJRtI"
+  }
+}
+```
+
+Padrão de Corpo:
+```json
+{
+	"name": "Carne assada",
+	"description": "Carne assada com arroz e feijão",
+	"price": "22"
+}
+```
+
+Padrão de Resposta (STATUS 201):
+```json
+{
+	"message": {
+		"id": 1,
+		"name": "Carne assada",
+		"description": "Carne assada com arroz e feijão",
+		"price": "22",
+		"createdAt": "2024-07-13T15:39:10.354Z",
+		"updatedAt": "2024-07-13T15:39:10.354Z",
+		"userId": 1
+	}
+}
+```
+
+### Procurar todos os produtos(necessário autorização): GET /product
+Forneça o token do usuário correspondente:
+```json
+{
+  "headers": {
+    "Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzA4NTQ2MDQzfQ.pDcRf1yu1XmVaIrRLOBoa6O_8Ukl1lxX-6lkxwcJRtI"
+  }
+}
+```
+
+Padrão de Resposta (STATUS 200):
+```json
+{
+	"message": [
+		{
+		"id": 1,
+		"name": "Carne assada",
+		"description": "Carne assada com arroz e feijão",
+		"price": "22",
+		"createdAt": "2024-07-13T15:39:10.354Z",
+		"updatedAt": "2024-07-13T15:39:10.354Z",
+		"userId": 1
+	}
+	]
+}
+```
+
+### Procurar todos os produtos(necessário autorização): GET /product/:id
+Forneça o token do usuário correspondente:
+```json
+{
+  "headers": {
+    "Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzA4NTQ2MDQzfQ.pDcRf1yu1XmVaIrRLOBoa6O_8Ukl1lxX-6lkxwcJRtI"
+  }
+}
+```
+
+Padrão de Resposta (STATUS 200):
+```json
+{
+	"message":
+		{
+		"id": 1,
+		"name": "Carne assada",
+		"description": "Carne assada com arroz e feijão",
+		"price": "22",
+		"createdAt": "2024-07-13T15:39:10.354Z",
+		"updatedAt": "2024-07-13T15:39:10.354Z",
+		"userId": 1
+	}
+}
+```
+
+
+### Atualizar um produto(necessário autorização): PATCH /product/:id
+Forneça o token do usuário correspondente:
+
+```json
+{
+  "headers": {
+    "Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzA4NTQ2MDQzfQ.pDcRf1yu1XmVaIrRLOBoa6O_8Ukl1lxX-6lkxwcJRtI"
+  }
+}
+```
+
+Padrão de Corpo:
+```json
+{
+	"name": "Peru",
+	"description": "a",
+	"price": "22"
+}
+```
+
+Padrão de Resposta (STATUS 201):
+```json
+{
+	"message": {
+		"id": 1,
+		"name": "Peru",
+		"description": "a",
+		"price": "22",
+		"createdAt": "2024-07-13T18:48:41.441Z",
+		"updatedAt": "2024-07-13T20:54:13.720Z",
+		"userId": 1
+	}
+}
+```
+
+
+### Deletar um produto(necessário autorização): PATCH /product/:id
+Forneça o token do usuário correspondente:
+
+```json
+{
+  "headers": {
+    "Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzA4NTQ2MDQzfQ.pDcRf1yu1XmVaIrRLOBoa6O_8Ukl1lxX-6lkxwcJRtI"
+  }
+}
+```
+
+Padrão de Resposta (STATUS 204):
+```json
+No body returned for response
 ```
