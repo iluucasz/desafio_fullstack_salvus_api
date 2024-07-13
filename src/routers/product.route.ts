@@ -5,7 +5,7 @@ import { AuthOwner } from '../middlewares/AuthOwner.middleware';
 import { AuthToken } from '../middlewares/authToken.middleware';
 import { validateBody } from '../middlewares/validateBody.middleware';
 import { ValidateId } from '../middlewares/validateId.middleware';
-import { productCreateSchema } from '../schemas/product.schema';
+import { productCreateSchema, productUpdateSchema } from '../schemas/product.schema';
 import { ProductServices } from '../services/product.service';
 
 container.registerSingleton('ProductService', ProductServices);
@@ -29,7 +29,7 @@ productRouter.post('/', validateBody.execute(productCreateSchema), AuthToken.exe
 productRouter.patch(
    '/:id',
    ValidateId.product,
-   validateBody.execute(productCreateSchema),
+   validateBody.execute(productUpdateSchema),
    AuthToken.execute,
    AuthOwner.execute,
    (req, res) => {
