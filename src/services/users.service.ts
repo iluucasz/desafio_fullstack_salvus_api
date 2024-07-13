@@ -2,7 +2,7 @@ import { injectable } from 'tsyringe';
 import { TUserLogin, TUserLoginReturn, TUserRegister, TUserReturn } from '../interfaces/user.interface';
 import { prisma } from '../database/db';
 import bcrypt from 'bcrypt';
-import { userReturn } from '../schemas/users.schema';
+import { userReturn, userReturnAll } from '../schemas/users.schema';
 import { AppError } from '../errors/AppError.error';
 import jwt from 'jsonwebtoken';
 
@@ -39,7 +39,12 @@ export class UsersService {
 
    getUser = async (id: number): Promise<TUserReturn> => {
       const user = await prisma.users.findUnique({ where: { id } });
-
       return userReturn.parse(user);
+   };
+
+   getAllUser = async (): Promise<TUserReturn[]> => {
+      const user = await prisma.users.findMany();
+
+      return userReturnAll.parse(user);
    };
 }

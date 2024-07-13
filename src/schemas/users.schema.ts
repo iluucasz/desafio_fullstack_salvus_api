@@ -10,3 +10,4 @@ export const userSchema = z.object({
 export const userRegisterSchemaCreate = userSchema.omit({ id: true });
 export const userLoginSchemaCreate = userSchema.omit({ id: true, name: true });
 export const userReturn = userSchema.omit({ password: true });
+export const userReturnAll = userSchema.omit({ password: true }).array();

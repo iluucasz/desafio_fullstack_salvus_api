@@ -21,3 +21,7 @@ userRouter.post('/login', validateBody.execute(userLoginSchemaCreate), (req, res
 userRouter.get('/', AuthToken.execute, (req, res) => {
    userController.getUsers(req, res);
 });
+
+userRouter.get('/:id', AuthToken.execute, (req, res) => {
+   userController.getUser(req, res);
+});

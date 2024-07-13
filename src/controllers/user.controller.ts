@@ -18,9 +18,14 @@ export class UserController {
       return response.status(200).json(login);
    };
 
-   getUsers = async (request: Request, response: Response): Promise<Response> => {
+   getUser = async (request: Request, response: Response): Promise<Response> => {
       const id = response.locals.decode.id;
       const getUser = await this.userService.getUser(id);
+      return response.status(200).json(getUser);
+   };
+
+   getUsers = async (request: Request, response: Response): Promise<Response> => {
+      const getUser = await this.userService.getAllUser();
       return response.status(200).json(getUser);
    };
 }
