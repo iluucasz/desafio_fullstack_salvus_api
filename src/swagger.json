@@ -6,7 +6,7 @@
   },
   "servers": [
     {
-      "url": "https://products-api-food-dc18b0689296.herokuapp.com/"
+      "url": "https://desafio-fullstack-salvus-api.onrender.com/"
     }
   ],
   "paths": {
